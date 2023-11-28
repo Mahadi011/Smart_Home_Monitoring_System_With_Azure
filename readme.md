@@ -1,2 +1,120 @@
 # Smart_Home_Monitoring_System_With_Azure
  
+This project aims to design and implement a Smart Home Security and Monitoring System leveraging the capabilities of Azure IoT. The system utilizes an ESP32 microcontroller connected to Azure IoT Hub via the MQTT protocol. Motion sensors ("In" and "Out") are employed to track entries and exits from the home. The data is stored in Azure Cosmos DB for future analysis. An Azure Function App, triggered by Event Grid, is responsible for processing the data and sending real-time notifications to users via a Telegram bot.
+
+## System Architecture  
+![diagram](diagram.jpg)
+
+In this project system has different layers
+
+1. Device Layer  
+2. Communication Layer
+3. Cloud Service Layer
+4. Processing and Notification Layer
+
+## Device Layer
+![esp32-sensor](esp32_sensor.png)
+
+__ESP32 Microcontroller:__ Acts as the primary device layer, responsible for collecting data from motion sensors ("In" and "Out").  
+__Motion Sensors ("In" and "Out"):__ Capture entry and exit events, respectively, providing input to the ESP32. Two motion sensors, "In" (connected to GPIO pin 13) and "Out" (connected to GPIO pin 32), are used to detect entries and exits.
+```cpp  
+void activeOutsensor(int data){
+  
+  if(data==1){
+    digitalWrite(INSENSOR,HIGH);
+    personCount++;
+    flag_status=0;
+    Serial.print("People Comming In Total people at home are:");
+    Serial.println(personCount);
+    if(personCount==1 && flag_status==0){
+      Serial.println("Someone at home....");
+    }
+    sendTelemetry();
+    delay(2000);
+
+  }
+    
+   
+}
+
+void activeInsensor(int data){
+  if(data==0){
+    digitalWrite(OUTSENSOR,LOW);
+    personCount--;
+    if(personCount<0){
+     personCount=0;
+     flag_status=0;
+    }
+    else{
+    flag_status=1;
+    Serial.print("People Going Out Total people at home are:");
+    Serial.println(personCount);
+    }
+    if(personCount==0 && flag_status==1){
+    
+    Serial.println("Home is empty");
+    }
+    if(personCount>=0 && flag_status==1){
+      sendTelemetry();
+    }  
+    delay(2000);       
+
+  }
+}
+
+```
+
+In the code activeOutsensor and activeInsensor these 2 functions are responsible for get "In" and "Out" data and send those data to the Azure IoT hub.
+
+## Communication Layer
+__MQTT Protocol:__ Facilitates lightweight and reliable communication between the ESP32 microcontroller and Azure IoT Hub.  
+__Azure IoT Hub:__ Serves as the central hub for device-to-cloud communication, receiving data from the ESP32 and ensuring secure and scalable connectivity.  
+## Cloud Services Layer
+__Azure Cosmos DB:__ The NoSQL database stores the incoming data for future analysis. Its scalability and low-latency retrieval make it ideal for handling real-time data.  
+__Event Grid:__ Triggers the Azure Function App in response to data events in Azure IoT Hub, ensuring immediate processing and action.  
+## Processing and Notification Layer
+```python
+telegramBotAPI="telegram token"
+Receivers_id="chat id"
+
+def SendMessege(message):
+    try:
+        Url="https://api.telegram.org/bot"+str(telegramBotAPI)+"/sendMessage?chat_id="+str(Receivers_id)
+        textdata={"text":message}
+        requests.request("POST",Url,params=textdata)
+    except Exception as e:
+        Message = str(e)+":Exception  in send message "
+        print(Message)
+
+def main(event: func.EventGridEvent):
+    logging.info("startin script")     
+    result = json.dumps({
+        'id': event.id,
+        'data': event.get_json(),
+        'topic': event.topic,
+        'subject': event.subject,
+        'event_type': event.event_type,
+    })    
+    result_dict = json.loads(result)   
+    
+    flag= result_dict['data']['body']['Flag']
+    people_count=result_dict['data']['body']['People_Count']     
+    
+    if flag==0 and people_count==1:
+        SendMessege("Some One At home......")
+    elif flag==1 and people_count==0:
+        SendMessege("Home is empty")   
+         
+    logging.info('Python EventGrid trigger processed an event: %s', result)
+
+```
+
+
+
+__Azure Function App:__ Processes incoming data, calculating and updating the person count based on "In" and "Out" sensor activations.  
+__Telegram Bot:__ Sends real-time notifications to users based on the person count. Messages include "SOMEONE AT HOME" when the count is 1 and "HOME IS EMPTY" when the count reaches 0.
+
+## Security:
+__Azure IoT Security:__ Ensures secure communication between devices and Azure IoT Hub. Adheres to Azure IoT security measures for data integrity and privacy.  
+__Cosmos DB Security:__ Utilizes Cosmos DB security features for safeguarding stored data. Implements measures to ensure data integrity and protect user privacy.  
+__Telegram Bot Security:__ Implements secure communication protocols for Telegram bot. Ensures the confidentiality and integrity of user notifications.  
