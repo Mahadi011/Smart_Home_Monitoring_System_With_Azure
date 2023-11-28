@@ -18,8 +18,7 @@ In this project system has different layers
 __ESP32 Microcontroller:__ Acts as the primary device layer, responsible for collecting data from motion sensors ("In" and "Out").  
 __Motion Sensors ("In" and "Out"):__ Capture entry and exit events, respectively, providing input to the ESP32. Two motion sensors, "In" (connected to GPIO pin 13) and "Out" (connected to GPIO pin 32), are used to detect entries and exits.
 ```cpp  
-void activeOutsensor(int data){
-  
+void activeOutsensor(int data){  
   if(data==1){
     digitalWrite(INSENSOR,HIGH);
     personCount++;
@@ -31,12 +30,8 @@ void activeOutsensor(int data){
     }
     sendTelemetry();
     delay(2000);
-
-  }
-    
-   
+  }   
 }
-
 void activeInsensor(int data){
   if(data==0){
     digitalWrite(OUTSENSOR,LOW);
@@ -57,8 +52,7 @@ void activeInsensor(int data){
     if(personCount>=0 && flag_status==1){
       sendTelemetry();
     }  
-    delay(2000);       
-
+    delay(2000);   
   }
 }
 
@@ -109,7 +103,7 @@ def main(event: func.EventGridEvent):
     logging.info('Python EventGrid trigger processed an event: %s', result)
 
 ```  
- Processes incoming data, calculating and updating the person count based on "In" and "Out" sensor activations.  
+ Processes incoming data, calculating and updating the person count based on "In" and "Out" sensor activations.It also process Flag value which means which sensor it is "In" sensor or "out" sensor.  
 __Telegram Bot:__ Sends real-time notifications to users based on the person count. Messages include "SOMEONE AT HOME" when the count is 1 and "HOME IS EMPTY" when the count reaches 0.  
 ![telegram](telegram.png) 
 
