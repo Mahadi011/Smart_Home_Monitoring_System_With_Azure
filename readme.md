@@ -3,7 +3,7 @@
 This project aims to design and implement a Smart Home Security and Monitoring System leveraging the capabilities of Azure IoT. The system utilizes an ESP32 microcontroller connected to Azure IoT Hub via the MQTT protocol. Motion sensors ("In" and "Out") are employed to track entries and exits from the home. The data is stored in Azure Cosmos DB for future analysis. An Azure Function App, triggered by Event Grid, is responsible for processing the data and sending real-time notifications to users via a Telegram bot.
 
 ## System Architecture  
-![diagram](Screenshots&pics\diagram.jpg)
+![diagram](Screenshots&pics/diagram.jpg)
 
 In this project system has different layers
 
@@ -105,7 +105,7 @@ def main(event: func.EventGridEvent):
 ```  
  Processes incoming data, calculating and updating the person count based on "In" and "Out" sensor activations.It also process Flag value which means which sensor it is "In" sensor or "out" sensor.  
 __Telegram Bot:__ Sends real-time notifications to users based on the person count. Messages include "SOMEONE AT HOME" when the count is 1 and "HOME IS EMPTY" when the count reaches 0.  
-![telegram](Screenshots&pics\telegram.png) 
+![telegram](Screenshots&pics/telegram.png) 
 
 ## Security:
 __Azure IoT Security:__ Ensures secure communication between devices and Azure IoT Hub. Adheres to Azure IoT security measures for data integrity and privacy.  
