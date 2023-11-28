@@ -72,7 +72,8 @@ __Azure IoT Hub:__ Serves as the central hub for device-to-cloud communication, 
 ## Cloud Services Layer
 __Azure Cosmos DB:__ The NoSQL database stores the incoming data for future analysis. Its scalability and low-latency retrieval make it ideal for handling real-time data.  
 __Event Grid:__ Triggers the Azure Function App in response to data events in Azure IoT Hub, ensuring immediate processing and action.  
-## Processing and Notification Layer
+## Processing and Notification Layer  
+__Azure Function App:__  
 ```python
 telegramBotAPI="telegram token"
 Receivers_id="chat id"
@@ -107,14 +108,13 @@ def main(event: func.EventGridEvent):
          
     logging.info('Python EventGrid trigger processed an event: %s', result)
 
-```
-
-
-
-__Azure Function App:__ Processes incoming data, calculating and updating the person count based on "In" and "Out" sensor activations.  
-__Telegram Bot:__ Sends real-time notifications to users based on the person count. Messages include "SOMEONE AT HOME" when the count is 1 and "HOME IS EMPTY" when the count reaches 0.
+```  
+ Processes incoming data, calculating and updating the person count based on "In" and "Out" sensor activations.  
+__Telegram Bot:__ Sends real-time notifications to users based on the person count. Messages include "SOMEONE AT HOME" when the count is 1 and "HOME IS EMPTY" when the count reaches 0.  
+![telegram](telegram.png) 
 
 ## Security:
 __Azure IoT Security:__ Ensures secure communication between devices and Azure IoT Hub. Adheres to Azure IoT security measures for data integrity and privacy.  
 __Cosmos DB Security:__ Utilizes Cosmos DB security features for safeguarding stored data. Implements measures to ensure data integrity and protect user privacy.  
 __Telegram Bot Security:__ Implements secure communication protocols for Telegram bot. Ensures the confidentiality and integrity of user notifications.  
+ 
