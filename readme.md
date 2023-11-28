@@ -15,8 +15,8 @@ In this project system has different layers
 ## Device Layer
 ![esp32-sensor](Screenshots&pics/esp32_sensor.png)
 
-__ESP32 Microcontroller:__ Acts as the primary device layer, responsible for collecting data from motion sensors ("In" and "Out").  
-__Motion Sensors ("In" and "Out"):__ Capture entry and exit events, respectively, providing input to the ESP32. Two motion sensors, "In" (connected to GPIO pin 13) and "Out" (connected to GPIO pin 32), are used to detect entries and exits.
+___ESP32 Microcontroller:___ Acts as the primary device layer, responsible for collecting data from motion sensors ("In" and "Out").  
+___Motion Sensors ("In" and "Out"):___ Capture entry and exit events, respectively, providing input to the ESP32. Two motion sensors, "In" (connected to GPIO pin 13) and "Out" (connected to GPIO pin 32), are used to detect entries and exits.
 ```cpp  
 void activeOutsensor(int data){  
   if(data==1){
@@ -61,13 +61,13 @@ void activeInsensor(int data){
 In the code activeOutsensor and activeInsensor these 2 functions are responsible for get "In" and "Out" data and send those data to the Azure IoT hub.
 
 ## Communication Layer
-__MQTT Protocol:__ Facilitates lightweight and reliable communication between the ESP32 microcontroller and Azure IoT Hub.  
-__Azure IoT Hub:__ Serves as the central hub for device-to-cloud communication, receiving data from the ESP32 and ensuring secure and scalable connectivity.  
+___MQTT Protocol:___ Facilitates lightweight and reliable communication between the ESP32 microcontroller and Azure IoT Hub.  
+___Azure IoT Hub:___ Serves as the central hub for device-to-cloud communication, receiving data from the ESP32 and ensuring secure and scalable connectivity.  
 ## Cloud Services Layer
-__Azure Cosmos DB:__ The NoSQL database stores the incoming data for future analysis. Its scalability and low-latency retrieval make it ideal for handling real-time data.  
-__Event Grid:__ Triggers the Azure Function App in response to data events in Azure IoT Hub, ensuring immediate processing and action.  
+___Azure Cosmos DB:___ The NoSQL database stores the incoming data for future analysis. Its scalability and low-latency retrieval make it ideal for handling real-time data. It saves data as Json formate.  
+___Event Grid:___ Triggers the Azure Function App in response to data events in Azure IoT Hub, ensuring immediate processing and action.  
 ## Processing and Notification Layer  
-__Azure Function App:__  
+___Azure Function App:___  
 ```python
 telegramBotAPI="telegram token"
 Receivers_id="chat id"
@@ -104,11 +104,13 @@ def main(event: func.EventGridEvent):
 
 ```  
  Processes incoming data, calculating and updating the person count based on "In" and "Out" sensor activations.It also process Flag value which means which sensor it is "In" sensor or "out" sensor.  
-__Telegram Bot:__ Sends real-time notifications to users based on the person count. Messages include "SOMEONE AT HOME" when the count is 1 and "HOME IS EMPTY" when the count reaches 0.  
+___Telegram Bot:___ Sends real-time notifications to users based on the person count. Messages include "SOMEONE AT HOME" when the count is 1 and "HOME IS EMPTY" when the count reaches 0.  
 ![telegram](Screenshots&pics/telegram.png) 
 
+___visualization:___ For visualization I am using Power Bi as output device. I am collecting data from Azure Data Explorer and export them to the power Bi and presenting as a Graph.
+
 ## Security:
-__Azure IoT Security:__ Ensures secure communication between devices and Azure IoT Hub. Adheres to Azure IoT security measures for data integrity and privacy.  
-__Cosmos DB Security:__ Utilizes Cosmos DB security features for safeguarding stored data. Implements measures to ensure data integrity and protect user privacy.  
-__Telegram Bot Security:__ Implements secure communication protocols for Telegram bot. Ensures the confidentiality and integrity of user notifications.  
+___Azure IoT Security:___ Ensures secure communication between devices and Azure IoT Hub. Adheres to Azure IoT security measures for data integrity and privacy.  
+___Cosmos DB Security:___ Utilizes Cosmos DB security features for safeguarding stored data. Implements measures to ensure data integrity and protect user privacy.  
+___Telegram Bot Security:___ Implements secure communication protocols for Telegram bot. Ensures the confidentiality and integrity of user notifications.  
  
