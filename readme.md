@@ -13,7 +13,7 @@ In this project system has different layers
 4. Processing and Notification Layer
 
 ## Device Layer
-![esp32-sensor](Screenshots&pics\esp32_sensor.png)
+![esp32-sensor](Screenshots&pics/esp32_sensor.png)
 
 __ESP32 Microcontroller:__ Acts as the primary device layer, responsible for collecting data from motion sensors ("In" and "Out").  
 __Motion Sensors ("In" and "Out"):__ Capture entry and exit events, respectively, providing input to the ESP32. Two motion sensors, "In" (connected to GPIO pin 13) and "Out" (connected to GPIO pin 32), are used to detect entries and exits.
