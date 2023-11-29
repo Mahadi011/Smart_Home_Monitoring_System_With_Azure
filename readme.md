@@ -62,7 +62,7 @@ In the code activeOutsensor and activeInsensor these 2 functions are responsible
 
 ## Communication Layer
 ___MQTT Protocol:___ Facilitates lightweight and reliable communication between the ESP32 microcontroller and Azure IoT Hub.  
-___Azure IoT Hub:___ Serves as the central hub for device-to-cloud communication, receiving data from the ESP32 and ensuring secure and scalable connectivity.  
+___Azure IoT Hub:___ Serves as the central hub for device-to-cloud communication, receiving data from the ESP32 and ensuring secure and scalable connectivity. In IpT Hub I have created 3 message route one for Cosmos DB, one for EventGrid and one for ADX.  
 ## Cloud Services Layer
 ___Azure Cosmos DB:___ The NoSQL database stores the incoming data for future analysis. Its scalability and low-latency retrieval make it ideal for handling real-time data. It saves data as Json formate.  
 ___Event Grid:___ Triggers the Azure Function App in response to data events in Azure IoT Hub, ensuring immediate processing and action.  
