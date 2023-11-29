@@ -1,6 +1,6 @@
 // Wifi
-#define IOT_CONFIG_WIFI_SSID "NeloyPixel7pro"
-#define IOT_CONFIG_WIFI_PASSWORD "hellangel"
+#define IOT_CONFIG_WIFI_SSID "Your SSID"
+#define IOT_CONFIG_WIFI_PASSWORD "Your password"
 #ifdef IOT_CONFIG_USE_X509_CERT
 
 #define IOT_CONFIG_DEVICE_CERT "Device Certificate"
