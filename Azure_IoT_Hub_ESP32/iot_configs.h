@@ -11,7 +11,7 @@
 #define IOT_CONFIG_DEVICE_ID "people_count"
 // Use device key if not using certificates
 #ifndef IOT_CONFIG_USE_X509_CERT
-#define IOT_CONFIG_DEVICE_KEY "tv40egvGIdS5qSoxtwE82TbQPq0t6xNzIAIoTNap4OA="
+#define IOT_CONFIG_DEVICE_KEY "Primary Connenction key"
 #endif // IOT_CONFIG_USE_X509_CERT
 
 // Publish 1 message every 2 seconds
