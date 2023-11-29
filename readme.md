@@ -66,6 +66,7 @@ ___Azure IoT Hub:___ Serves as the central hub for device-to-cloud communication
 ## Cloud Services Layer
 ___Azure Cosmos DB:___ The NoSQL database stores the incoming data for future analysis. Its scalability and low-latency retrieval make it ideal for handling real-time data. It saves data as Json formate.  
 ___Event Grid:___ Triggers the Azure Function App in response to data events in Azure IoT Hub, ensuring immediate processing and action.  
+___Azure Data Explorer:___ Azure Data Explorer (ADX) is a real-time data exploration service on Microsoft Azure. It's designed for analyzing large and diverse datasets quickly. Key features include seamless data ingestion from IoT Hub, a schema-less data model, a powerful query language called Kusto Query Language (KQL), and integration with other Azure services. ADX excels in real-time analytics, making it suitable for scenarios like log and telemetry analysis. It offers robust security, scalability, and management tools for efficient data processing.
 ## Processing and Notification Layer  
 ___Azure Function App:___  
 ```python
@@ -107,10 +108,12 @@ def main(event: func.EventGridEvent):
 ___Telegram Bot:___ Sends real-time notifications to users based on the person count. Messages include "SOMEONE AT HOME" when the count is 1 and "HOME IS EMPTY" when the count reaches 0.  
 ![telegram](Screenshots&pics/telegram.png) 
 
-___visualization:___ For visualization I am using Power Bi as output device. I am collecting data from Azure Data Explorer and export them to the power Bi and presenting as a Graph.
+___visualization:___ 
+![visualization](Screenshots&pics\visualization.jpg)  For visualization I am using Power Bi as output device. I am collecting data from Azure Data Explorer and export them to the power Bi and presenting as a Graph.
 
 ## Security:
-___Azure IoT Security:___ Ensures secure communication between devices and Azure IoT Hub. Adheres to Azure IoT security measures for data integrity and privacy.  
+
+___Azure IoT Security:___ Ensures secure communication between devices and Azure IoT Hub. When I connect my device to the Azure IoT Hub I used Azure device Id and Connection Key which gives me a secure way to connect my device to Azure. Adheres to Azure IoT security measures for data integrity and privacy.  
 ___Cosmos DB Security:___ Utilizes Cosmos DB security features for safeguarding stored data. Implements measures to ensure data integrity and protect user privacy.  
-___Telegram Bot Security:___ Implements secure communication protocols for Telegram bot. Ensures the confidentiality and integrity of user notifications.  
+___Telegram Bot Security:___ Implements secure communication protocols for Telegram bot. I used token which gives me a secure way to access my Telegram Bot. Ensures the confidentiality and integrity of user notifications.  
  
