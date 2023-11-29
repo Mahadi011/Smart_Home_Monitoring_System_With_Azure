@@ -4,8 +4,8 @@ import logging
 import azure.functions as func
 import requests
 
-telegramBotAPI="6984774906:AAHJUNg1P7AsnKdwd7MlCd3n1hkOZZEbnsE"
-Receivers_id="6436866315"
+telegramBotAPI="Your token from Telegram Bot"
+Receivers_id="Chat Id"
 
 def SendMessege(message):
     try:
