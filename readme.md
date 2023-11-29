@@ -109,7 +109,7 @@ ___Telegram Bot:___ Sends real-time notifications to users based on the person c
 ![telegram](Screenshots&pics/telegram.png) 
 
 ___visualization:___ 
-![visualization](Screenshots&pics\visualization.jpg)  For visualization I am using Power Bi as output device. I am collecting data from Azure Data Explorer and export them to the power Bi and presenting as a Graph.
+![visualization](Screenshots&pics/visualization.jpg)    For visualization I am using Power Bi as output device. I am collecting data from Azure Data Explorer and export them to the power Bi and presenting as a Graph.
 
 ## Security:
 
