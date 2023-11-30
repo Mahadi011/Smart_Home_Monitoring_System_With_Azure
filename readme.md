@@ -106,13 +106,14 @@ def main(event: func.EventGridEvent):
 
 ```  
  Processes incoming data, calculating and updating the person count based on "In" and "Out" sensor activations.It also process Flag value which means which sensor it is "In" sensor or "out" sensor.  
-___Telegram Bot:___ Sends real-time notifications to users based on the person count. Messages include "SOMEONE AT HOME" when the count is 1 and "HOME IS EMPTY" when the count reaches 0.  
+___Telegram Bot:___ Sends real-time notifications to users based on the person count. Messages include "SOMEONE AT HOME" when the count is 1 and "HOME IS EMPTY" when the count reaches 0. 
+ 
 ![telegram](Screenshots&pics/telegram.png) 
 
 ___visualization:___ 
 ![visualization](Screenshots&pics/visualization.jpg)   
 ![TAble](Screenshots&pics/Table.jpg)  
-For visualization I am using Power Bi as output device. I am collecting data from Azure Data Explorer and export them to the power Bi and presenting as a Graph.
+For visualization I am using Power Bi as a dashbord. I am collecting data from Azure Data Explorer and export them to the power Bi and presenting as a Graph.
 
 
 
