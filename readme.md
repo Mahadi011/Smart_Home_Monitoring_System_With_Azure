@@ -64,9 +64,10 @@ In the code activeOutsensor and activeInsensor these 2 functions are responsible
 ___MQTT Protocol:___ Facilitates lightweight and reliable communication between the ESP32 microcontroller and Azure IoT Hub.  
 ___Azure IoT Hub:___ Serves as the central hub for device-to-cloud communication, receiving data from the ESP32 and ensuring secure and scalable connectivity. In IpT Hub I have created 3 message route one for Cosmos DB, one for EventGrid and one for ADX.  
 ## Cloud Services Layer
-___Azure Cosmos DB:___ The NoSQL database stores the incoming data for future analysis. Its scalability and low-latency retrieval make it ideal for handling real-time data. It saves data as Json formate.  
+___Azure Cosmos DB:___ At the heart of this project lies Cosmos DB, a powerful and versatile NoSQL database that serves as the primary data storage server. The decision to entrust Cosmos DB with this pivotal role is rooted in its ability to provide lightning-fast access to data, unparalleled scalability, and a schema-agnostic structure that effortlessly accommodates diverse data types. It saves data as Json formate.  
 ___Event Grid:___ Triggers the Azure Function App in response to data events in Azure IoT Hub, ensuring immediate processing and action.  
-___Azure Data Explorer:___ Azure Data Explorer (ADX) is a real-time data exploration service on Microsoft Azure. It's designed for analyzing large and diverse datasets quickly. Key features include seamless data ingestion from IoT Hub, a schema-less data model, a powerful query language called Kusto Query Language (KQL), and integration with other Azure services. ADX excels in real-time analytics, making it suitable for scenarios like log and telemetry analysis. It offers robust security, scalability, and management tools for efficient data processing.
+___Azure Data Explorer:___ Azure Data Explorer (ADX) is a real-time data exploration service on Microsoft Azure. It's designed for analyzing large and diverse datasets quickly. Key features include seamless data ingestion from IoT Hub, a schema-less data model, a powerful query language called Kusto Query Language (KQL), and integration with other Azure services. ADX excels in real-time analytics, making it suitable for scenarios like log and telemetry analysis. It offers robust security, scalability, and management tools for efficient data processing.  
+___Blob Storage:___ In tandem with Cosmos DB, I introduce Blob Storage, a strategic choice for safeguarding data over the long term. Recognizing the economic advantages of Blob Storage, it emerges as the ideal solution for storing data in a more cost-effective manner compared to external alternatives. This second layer of storage acts as a reservoir for historical data, ensuring that valuable information persists beyond the confines of a single year. Through a seamless process, data gracefully transitions from Cosmos DB to Blob Storage, creating a symbiotic relationship that optimizes both performance and economy.
 ## Processing and Notification Layer  
 ___Azure Function App:___  
 ```python
@@ -113,8 +114,10 @@ ___visualization:___
 ![TAble](Screenshots&pics/Table.jpg)  
 For visualization I am using Power Bi as output device. I am collecting data from Azure Data Explorer and export them to the power Bi and presenting as a Graph.
 
-## Security:
 
+
+## Security
+___MQTTS Protocol:___ In this project I used MQTTS Protocol which is a secure way to communicate between my device and Azure IoT Hub.   
 ___Azure IoT Security:___ Ensures secure communication between devices and Azure IoT Hub. When I connect my device to the Azure IoT Hub I used Azure device Id and Connection Key which gives me a secure way to connect my device to Azure. Adheres to Azure IoT security measures for data integrity and privacy.  
 ___Cosmos DB Security:___ Utilizes Cosmos DB security features for safeguarding stored data. Implements measures to ensure data integrity and protect user privacy.  
 ___Telegram Bot Security:___ Implements secure communication protocols for Telegram bot. I used token which gives me a secure way to access my Telegram Bot. Ensures the confidentiality and integrity of user notifications.  
