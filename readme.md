@@ -117,7 +117,7 @@ For visualization I am using Power Bi as output device. I am collecting data fro
 
 
 ## Security
-___MQTTS Protocol:___ In this project I used MQTTS Protocol which is a secure way to communicate between my device and Azure IoT Hub.   
+___MQTTS Protocol:___ MQTTS enhances MQTT by incorporating security features, making it well-suited for scenarios where data privacy and integrity are crucial. By implementing encryption through TLS or SSL, MQTTS ensures that the communication between devices and the IoT Hub remains confidential and protected against potential security threats.  
 ___Azure IoT Security:___ Ensures secure communication between devices and Azure IoT Hub. When I connect my device to the Azure IoT Hub I used Azure device Id and Connection Key which gives me a secure way to connect my device to Azure. Adheres to Azure IoT security measures for data integrity and privacy.  
 ___Cosmos DB Security:___ Utilizes Cosmos DB security features for safeguarding stored data. Implements measures to ensure data integrity and protect user privacy.  
 ___Telegram Bot Security:___ Implements secure communication protocols for Telegram bot. I used token which gives me a secure way to access my Telegram Bot. Ensures the confidentiality and integrity of user notifications.  
